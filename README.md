@@ -13,7 +13,6 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
 # DC3 Algorithm
 # S[Seward] Algorithm
 # KA Algorithm / NZC Algorithm
-
 # Pratical Application
 # Reference
 # Competitive Programming Problems
