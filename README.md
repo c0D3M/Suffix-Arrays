@@ -8,7 +8,9 @@ There are so many algorithm being developed considering vast application of Suff
 * Prefix Doubling  - Manaber -meyers/Larsson-Sadakane
 * Recursive Algorithm - DC3, KA Algroithm, NZC Algorithm
 * Induced Sorting - S Algorith/MF Algorithm
+
 Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster.ca/~bill/best/algorithms/07Taxonomy.pdf)
+
 # Prefix Doubling Algorithm
 # DC3 Algorithm
 # S[Seward] Algorithm
