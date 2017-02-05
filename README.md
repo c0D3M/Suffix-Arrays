@@ -15,6 +15,15 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
 # DC3 Algorithm
 # S[Seward] Algorithm
 # KA Algorithm / NZC Algorithm
-# Pratical Application
-# Reference
+# Burrows Wheelers Transform
+   * Inverting
+   * Pattern Matching using LF mapping
+   * FM-Index
+   * Wavelet Tree
+   * RRR Data structure.
+
+# Practical Application
 # Competitive Programming Problems
+# Reference
+# Suffix Tree using Suffix Array
+# Suffix Tree using Ukkonen Algorithm
