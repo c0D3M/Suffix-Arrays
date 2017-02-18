@@ -52,6 +52,24 @@ in-case of tie take right one.
 |4|4|4|
 
 so like this store all possible combination for each pattern in H``.
+Notice that column are decreasing by 1 in each row i.e. row 0 has 5 entries, row 1 has 4 and so on...which make n*(n+1)/2
+5+4+3+2+1 = 15 entries in __P__ array.
+Visualize __P__ like below.
+
+||0|1|2|3|4|
+|---|---|---|---|---|---|
+|0|0|1|2|2|2|
+|1|*|1|2|2|2|
+|2|*|*|2|2|2|
+|3|*|*|*|3|4|
+|4|*|*|*|*|4|
+
+
+
+#Index in array __P__
+By start index: end index will be blocksize 
+
+By end index: start index will be 0, so straightforward just lookup end_index. 
 
 __Storage__:
 Number of block is  2n/log(n)
@@ -61,14 +79,17 @@ and this array can be index using decimal equivalent of block
 for example 00011 is 3 , and we know in each block  there are 15 combination for each decimal equivalent of block.
 So in above example array __P__ is stored from location __45__ (decimal equivalent * blocksize i.e. 3*15)
 Note even table __P__ shown as array , we will store this also as 1D array.
- So now suppose  you have query what is minimum at 3rd block 2nd index.
- 1.Calculate decimal equivalent of 3rd block and reach to index in __T__
- 2.Lookup [2,4] , and that gives you minimum.
+
+So now suppose  you have query what is minimum at 3rd block 2nd index
+
+* Calculate decimal equivalent of 3rd block, multiply with blocksize and reach to index in __T__
+* Lookup [2,4] from that __T__ index, and that gives you minimum.
+
  
  
 
 
-RMQ to LCA
+#### RMQ to LCA
 RMQ problem can be converted to generalized RMQ problem by first converting it to LCA problem and then can be solved using above way.
 We use cartesian tree to convert RMQ to LCA
 
