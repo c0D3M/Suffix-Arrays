@@ -67,7 +67,13 @@ Visualize __P__ like below.
 
 
 #Index in array __P__
-By start index: end index will be blocksize 
+By start index: end index will be blocksize.
+so (index+1) * blocksize minus unsed (see table above). +1 because we are counting from 0
+unsued can be calculated easily index *(index +1)/2
+For example if one has find minimum from starting index 3 it would be 
+
+4 * 5 - [3*4/2] = 14 and extra -1 (counting from 0) so answer is 13 , you can verify that 3,4 when stored in 1D will be at 13th index.
+
 
 By end index: start index will be 0, so straightforward just lookup end_index. 
 
@@ -82,8 +88,9 @@ Note even table __P__ shown as array , we will store this also as 1D array.
 
 So now suppose  you have query what is minimum at 3rd block 2nd index
 
-* Calculate decimal equivalent of 3rd block, multiply with blocksize and reach to index in __T__
-* Lookup [2,4] from that __T__ index, and that gives you minimum.
+* Calculate decimal equivalent of 3rd block, multiply with blocksize and reach to index in __T__ , gives 45
+* Lookup [2,4](refer indexing section above with start_index on how to find the index ] from that __T__ index, and that gives you minimum, gives 11
+so index in __T__ would be __56__ i.e. 45+11
 
  
  
