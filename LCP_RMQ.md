@@ -1,6 +1,6 @@
 First lets define the terms.
 
-## LCA (Longest Common Ancestor):Given a pair of nodes , the common ancestor which is farthest from root. See Wikipedia for better explanation.
+## LCA (Lowest Common Ancestor):Given a pair of nodes , the common ancestor which is farthest from root. See Wikipedia for better explanation.
 ## RMQ (Range Minimum Query) : Given an array of number , return the index which is minimum between a given pair of indices.
 
 LCP problem can be converted to RMQ problem as following
