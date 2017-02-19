@@ -1,7 +1,12 @@
+First lets define the terms.
+
+## LCA (Longest Common Ancestor):Given a pair of nodes , the common ancestor which is farthest from root. See Wikipedia for better explanation.
+## RMQ (Range Minimum Query) : Given an array of number , return the index which is minimum between a given pair of indices.
+
 LCP problem can be converted to RMQ problem as following
-* Do Euler Tour and stores the vertex  in array E
-* Store level of each vertex during Euler tour in H, Note that consecutive entry in this array will differe by +/- 1 [ because the path will go down or up and this will only change level either by +1 or -1]
-* Store occurence of each vertex in another array R
+* Do Euler Tour and stores the vertex  in array E. Note that wize of this array will be __2n-1__ because every edge is visitee twice.
+* Store level of each vertex during Euler tour in H, Note that consecutive entry in this array will differe by +/- 1 [ because the path will go down or up and this will only change level either by +1 or -1]. This too will be 2n-1
+* Store occurence of each vertex in another array R. Size will be n as there are n vertices.
 How to find LCA
 * First check in array R when these nodes occured during traversal this will be A and B.
 * Next you get traversal number , check in array L , the shallow node (the minium level ) going from A to B.
