@@ -11,10 +11,11 @@ How to find LCA
 * First check in array R when these nodes occured during Euler tour traversal, this will be A and B.
 * Next you get traversal number, check in array L , the shallow node (the minium level ) going from A to B.
 * This will give travesal number , map that in E array. Because if L stores level of that node , E store node number.
+![LCA RMQ Euler Tour](euler.png "LCA Example using RMQ")
 
 LCA of node n will get converted to RMQ of 2n-1 (L array).
 
-Problem boils down to finding RMQ in H, which can be done in multiple ways.
+Problem boils down to finding RMQ in L, which can be done in multiple ways.
 * Using Table lookup <O(n^2), O(1)>
 * Using Sparse Table (ST) <O(n log(n)), O(1)>
 * Using Segment Tree <O(n), O(1)>
