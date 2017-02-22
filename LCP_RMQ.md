@@ -5,21 +5,26 @@ First lets define the terms.
 
 LCP problem can be converted to RMQ problem as following
 * Do [Euler Tour!](https://en.wikipedia.org/wiki/Eulerian_path) on the given tree and stores the vertex visisted in an array E. Note that size of this array will be __2n-1__ because every edge has even degree and is visited twice.
-* Store level of each vertex during Euler tour in an array H. Note that consecutive entry in this array will differe by +/- 1 [ because the euler path will eithe go down or up and this will only change level either by +1 or -1]. This too will be 2n-1
+* Store level of each vertex during Euler tour in an array L. Note that consecutive entry in this array will differe by +/- 1 [ because the euler path will eithe go down or up and this will only change level either by +1 or -1]. This too will be 2n-1
 * Store occurence of first occurence each vertex in E another array R. Size will be n as there are n vertices.
+
 How to find LCA
+
 * First check in array R when these nodes occured during Euler tour traversal, this will be A and B.
 * Next you get traversal number, check in array L , the shallow node (the minium level ) going from A to B.
 * This will give travesal number , map that in E array. Because if L stores level of that node , E store node number.
+
+Lets see this with an example.
+
 ![LCA RMQ Euler Tour](euler.png "LCA Example using RMQ")
 
 LCA of node n will get converted to RMQ of 2n-1 (L array).
 
 Problem boils down to finding RMQ in L, which can be done in multiple ways.
-* Using Table lookup <O(n^2), O(1)>
-* Using Sparse Table (ST) <O(n log(n)), O(1)>
-* Using Segment Tree <O(n), O(1)>
-* <O(n), O(1)> Algorithm on Restricted RMQ
+* Using Table lookup \<O(n^2), O(1)>
+* Using Sparse Table (ST) \<O(n log(n)), O(1)>
+* Using Segment Tree \<O(n), O(1)>
+* \<O(n), O(1)> Algorithm for finding RMQ on Restricted array (contains only +- 1)
 
 Divide array L in block of size log (n) /2. Their will be 2n/log n such blocks  [ n/[log(n)/2] = 2n/log(n)
 Convert H array in to H` and further -1 -> 0 and +1 ->1
