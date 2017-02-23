@@ -89,7 +89,52 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
 # S[Seward] Algorithm
 # KA Algorithm / NZC Algorithm
 # Burrows Wheelers Transform
+   * BWT
+      
+      BWT are helpful in converting and inpur string containing **repeated subsequence into runs** and then run length encoding can be         used to allow compression.
+      For a given input string, sort all cyclic rotation in lexigoraphical order and the last column give you BWT.
+      For example
+      ababaa$
+      Refer the table above , BWT(ababaa$)   = aabb$aa
+      Actually they are one previous character in suffix array.
+      Trick is in English language any common word like **and** when suffix sorted its previous characters(in last column) would be           **a** and that would contribute to run.
    * Inverting
+       Lets see if we have BWT can we recover original string.
+       
+       ##### Naive Way.
+       
+       As we know BWT is last column in sorted cyclic rotation.We also know that first column is sorted.
+       
+       $-----a1
+       a1-----a2
+       a2-----b1      
+       a3-----b2
+       a4-----$
+       b1-----a3
+       b2-----a4 
+       combine them because we know what preceeds each sorted suffix and then sort
+       
+       a$       $a---a         a$a        $ab--a       a$ab       $aba--a       a$aba       $abab-a
+       aa       a$---a         aa$        a$a--a       aa$a       a$ab--a       aa$ab       a$aba-a
+       ba       aa---b         baa        aa$--b       baa$       aa$a--b       baa$a       aa$ab-b
+       ba Sort->ab---b Join -> bab Sort-->aba--b Join->baba Sort->abaa--b Join->babaa Sort->abaa$-b  
+       $a       ab---$         $ab        aba--$       $aba       abab--$       $abab       ababa-$ 
+       ab       ba---a         aba        baa--a       abaa       baa$--a       abaa$       baa$a-a
+       ab       ba---a         aba        bab--a       abab       baba--a       ababa       babaa-a
+       
+       Keep doing this and eventually we get the input string.
+       But the problem is it take lot more memory.
+       ##### First last property.
+       Occurence of any symbol in first and last column matches.
+       Trick is we know that BWT contains symbol one previous that of suffix array (which are in lexigraphical order).
+       So start with $ (because we know for sure that this is last symbol in original string).
+       Now BWT corresponding to this $ tells what lies before $ so that symbol preceed $ in original string, take that lookup i
+       first column and find again the correspoding BWT symbol.
+       Repeating this process we spell out original string.
+       Take example above
+       $ ->a1 -> a2-> b1->a3->b2-> a4->$
+       So original string is ababaa$
+       
    * Pattern Matching using LF mapping
    * FM-Index
    * Wavelet Tree
