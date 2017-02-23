@@ -143,23 +143,28 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
       There are 4 places starts with **a** but only 2 has **last columns as b** (row 2 & 3)
       Selct those b's row and look which of them has last column as **a**ba , both b rows has,
       so **aba** occurs 2 times in original text.
-      Problem with this approach is one has to scan the whole last column to find the symbol.
+      Problem with this approach is one has to linearly scan the whole last column range to find the symbol.
       This can be solved using Couting filter which store at each row , for each symbol , its count in last column.
+      So now while lookin for last column look that the symbol transition range.
+      For example 
       
-      $  |a  |b  
-      ---|---|---
-      0  | 0 |0
-      0  | 1 |0
-      0  | 2 |0
-      0  | 2 |1
-      0  | 2 |2
-      1  | 2 |2
-      1  | 3 | 2
-      1  | 4 |2
+      Fst|Last|$  |a  |b  
+      ---|--- |---|---|---
+      $  |a   |0  | 0 |0
+      a  |a   |0  | 1 |0
+      a  |b   |0  | 2 |0
+      a  |b   |0  | 2 |1
+      a  |$   |0  | 2 |2
+      b  |a   |1  | 2 |2
+      b  |a   |1  | 3 |2
+      X  |X   | 1 | 4 |2
       
-      
-      
+      For a in first column b changes from 0 to 2 , that means there are 2 b's in last column.
+      Goto B column and then look for 'a' and it changes 2 to 3 that means their is 1 a before a so pattern aba occurs once in string.
+           
    * FM-Index
+     As we see above LF mapping is faster but it still has some limitation.
+     
    * Wavelet Tree
    * RRR Data structure.
 
