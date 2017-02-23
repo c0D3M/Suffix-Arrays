@@ -114,13 +114,13 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
        b2-----a4 
        combine them because we know what preceeds each sorted suffix and then sort
        
-       a$       $a---a         a$a        $ab--a       a$ab       $aba--a       a$aba       $abab-a
-       aa       a$---a         aa$        a$a--a       aa$a       a$ab--a       aa$ab       a$aba-a
-       ba       aa---b         baa        aa$--b       baa$       aa$a--b       baa$a       aa$ab-b
-       ba Sort->ab---b Join -> bab Sort-->aba--b Join->baba Sort->abaa--b Join->babaa Sort->abaa$-b  
-       $a       ab---$         $ab        aba--$       $aba       abab--$       $abab       ababa-$ 
-       ab       ba---a         aba        baa--a       abaa       baa$--a       abaa$       baa$a-a
-       ab       ba---a         aba        bab--a       abab       baba--a       ababa       babaa-a
+       a$       $a---a         a$a        $ab--a       a$ab       $aba--a       a$aba       $abab-a      a$abab      $ababaa
+       aa       a$---a         aa$        a$a--a       aa$a       a$ab--a       aa$ab       a$aba-a      aa$aba      a$ababa
+       ba       aa---b         baa        aa$--b       baa$       aa$a--b       baa$a       aa$ab-b      baa$ab      aa$abab
+       ba Sort->ab---b Join -> bab Sort-->aba--b Join->baba Sort->abaa--b Join->babaa Sort->abaa$-bJoin->babaa$Sort->abaa$ab  
+       $a       ab---$         $ab        aba--$       $aba       abab--$       $abab       ababa-$      $ababa      ababaa$ 
+       ab       ba---a         aba        baa--a       abaa       baa$--a       abaa$       baa$a-a      abaa$a      baa$aba
+       ab       ba---a         aba        bab--a       abab       baba--a       ababa       babaa-a      ababaa      babaa$a 
        
        Keep doing this and eventually we get the input string.
        But the problem is it take lot more memory.
@@ -136,6 +136,29 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
        So original string is ababaa$
        
    * Pattern Matching using LF mapping
+      Next lets see how BWT is useful in doing pattern matching.
+      Key is to sart searching for pattern in backward fashion because BWT stores what lies before any given symbol.
+      For example to search **aba** in **ababaaa**
+      start with ab**a** and look in first column.
+      There are 4 places starts with **a** but only 2 has **last columns as b** (row 2 & 3)
+      Selct those b's row and look which of them has last column as **a**ba , both b rows has,
+      so **aba** occurs 2 times in original text.
+      Problem with this approach is one has to scan the whole last column to find the symbol.
+      This can be solved using Couting filter which store at each row , for each symbol , its count in last column.
+      
+      $  |a  |b  
+      ---|---|---
+      0  | 0 |0
+      0  | 1 |0
+      0  | 2 |0
+      0  | 2 |1
+      0  | 2 |2
+      1  | 2 |2
+      1  | 3 | 2
+      1  | 4 |2
+      
+      
+      
    * FM-Index
    * Wavelet Tree
    * RRR Data structure.
