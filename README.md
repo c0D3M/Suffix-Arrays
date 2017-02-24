@@ -199,9 +199,44 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
        For SA , since we are storing every kth suffix in T , total size would be
        n * **k**
        
+       Reference:
+       https://www.youtube.com/watch?v=kvVGj5V65io&t=824s
+       https://www.cs.jhu.edu/~langmea/resources/lecture_notes/bwt_and_fm_index.pdf
+       
      
    * Wavelet Tree
+       During pattern matching we have to search  last column from 0 to start/end of index of first character.
+       Like searching **aba** , we first goto first column and find range of a i.e.  1,4
+       during in last column we have to find **b**
+       rank(1, b) and rank(4, b) , we wanted to find number of **b** in last column from 0 to 1 and 0 to 4.
+       We achieved this by using count array and some optimization in earlier section.
+       Here we will see alternative approach using wavelet tree to answer these queries in O(1) time
+        Broadly these are the steps.
+        * Encode first half of string as 0 and second half as 1
+        * Group each 0-encoded symbol as left subtree 
+        * Group 1-encoded symbol as right subtree
+        * Recursively do that.
+        
+        Lets see how we create Wavelet Tree of BWT **aabb$aa**
+        {$,a} -> 0
+        {b} -> 1
+                                     aabb$aa
+                                     0011000
+                                     /
+                                    /
+                                  aa$aa
+                                  11011
+                                   
+                                   aabb$aa
+                                   0123456
+         Suppose we need to find rank(4,a) , now till 4 {$a} index will change to 2
+         Goto left subtree , now its unique , so rank is 2.
+         More here http://alexbowe.com/wavelet-trees/                              
+         Time complexity would be O (log n)
+         
    * RRR Data structure.
+          http://alexbowe.com/rrr/
+          
 
 # Practical Application
 # Competitive Programming Problems
