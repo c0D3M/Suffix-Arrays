@@ -163,7 +163,30 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
       Goto B column and then look for 'a' and it changes 2 to 3 that means their is 1 a before a so pattern aba occurs once in string.
            
    * FM-Index
-     As we see above LF mapping is faster but it still has some limitation.
+     There are still 3 issues with above way of pattern matching.
+     * Scanning in last column can be linear scan and in worst case can be O(n).
+       Key idea to fix is to store a tally table for occurence of each symbol in last column.
+       For example
+       a  |b
+       ---|---
+       0  | 0
+       1  | 0
+       2  | 0
+       2  | 1
+       2  | 2
+       3  | 2
+       4  | 2
+       This basically tells at each row how many **a** and **b** are seen, for example
+       row = 3 , a=2 and b=1 i.e. 2 a's and 1 b's are seen.
+       
+       Now storing this kind of table also can take space, instead we store every 5th or so(checkpoint) entried and infer the requried          value from nearest checkpoint.
+       This also solved 2nd issue of saving space.
+     * Storing count array for each symbol take O(n) * |alphabet|
+     * This kind of pattern matching didnt tell posiition at which the match occurs.
+        Use Suffix Array but store suffix's at every other 'k' position with respect to n not suffix Array.
+        THis is important because storing every kth suffix wrt to T give us a constant time to k to find suffix array if it didnt 
+        available at a given row position.We will use LF mapping to find the row which has Suffix Array value present.
+         SA(row)= SA(k) + number of LF mapping jumps.
      
    * Wavelet Tree
    * RRR Data structure.
