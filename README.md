@@ -7,7 +7,10 @@ While studying more about it, I read about Suffix Array.
 There are so many algorithm being developed considering vast application of Suffix Array in patter matching, compression, Genome Sequencing.These Algorithm can be categorised into broadly three category.
 
 * Prefix Doubling  - Manaber -meyers/Larsson-Sadakane
+* Recursive Algorithm - DC3, KA Algroithm, NZC Algorithm
+* Induced Sorting - S Algorith/MF Algorithm
 
+# Prefix Doubling Algorithm
 Key idea is if you take cyclic rotation at each position of a given string and sort it and remove everything after $ from each string you will have a sorted suffix.
 Lets see this with an example 
 String = ababaa
@@ -28,7 +31,6 @@ papa$
 
 So our input string is ababaa$
 String starting at index.
-
 
 index | string|index | string|index | string
 ------|-------|------|-------|------|-------
@@ -79,12 +81,11 @@ rank = [0,1,1,1,1,2,2] because there are only 3 different elements i.e. $, a, b
 
 
 
-* Recursive Algorithm - DC3, KA Algroithm, NZC Algorithm
-* Induced Sorting - S Algorith/MF Algorithm
+
 
 Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster.ca/~bill/best/algorithms/07Taxonomy.pdf)
 
-# Prefix Doubling Algorithm
+
 # DC3 Algorithm
 # S[Seward] Algorithm
 # KA Algorithm / NZC Algorithm
