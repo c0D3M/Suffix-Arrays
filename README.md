@@ -183,10 +183,22 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
        This also solved 2nd issue of saving space.
      * Storing count array for each symbol take O(n) * |alphabet|
      * This kind of pattern matching didnt tell posiition at which the match occurs.
-        Use Suffix Array but store suffix's at every other 'k' position with respect to n not suffix Array.
-        THis is important because storing every kth suffix wrt to T give us a constant time to k to find suffix array if it didnt 
-        available at a given row position.We will use LF mapping to find the row which has Suffix Array value present.
-         SA(row)= SA(k) + number of LF mapping jumps.
+       Use Suffix Array but store suffix's at every other 'k' position with respect to n not suffix Array.
+       This is important because storing every kth suffix wrt to T give us a constant time to k to find suffix array t didnt 
+       available at a given row position.We will use LF mapping to find the row which has Suffix Array value present.
+         
+       SA(row)= SA(k) + number of LF mapping jumps.
+       
+       Memory Foot print of FM-Index
+       First we store F and L rows,
+       F is basically symbol in sorted occurence, just store start index for each symbol.
+       L is basically BWT of N , so its size will be O(n)
+       For checkpoint we save fraction of tally , lets say we wanted to **a** fraction, so total size will be 
+       n * **a** * symbol_size
+       
+       For SA , since we are storing every kth suffix in T , total size would be
+       n * **k**
+       
      
    * Wavelet Tree
    * RRR Data structure.
