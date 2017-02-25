@@ -86,13 +86,12 @@ rank = [0,1,1,1,1,2,2] because there are only 3 different elements i.e. $, a, b
 
 Similar in next iteration we will take 2 symbol at a time from the order/rank of previous cycle.
                0123456 
-order string = $aaaabb
 Original     = ababaa$
 order = [6, 0, 2, 4, 5, 1, 3]
 rank =  [0, 1, 1, 1, 1, 2, 2]
 
-Start from end in the order of previous cycle.
-Get its order and move L symbol back and get its class.
+Scan the order of previous cycle from back
+Get its order and move L position back and get the class of this index.
 order['b']= 3 move L symbol back i.e. 'a'
 newOrder[rank['a']]== pos
 
