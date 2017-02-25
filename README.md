@@ -230,13 +230,16 @@ Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster
                                    
                                    aabb$aa
                                    0123456
-         Suppose we need to find rank(4,a) , now till 4 {$a} index will change to 2
-         Goto left subtree , now its unique , so rank is 2.
-         More here http://alexbowe.com/wavelet-trees/                              
-         Time complexity would be O (log n)
+         Suppose we need to find rank(4,a) , since a is encoded as 0 find rank(0, 4) which would be 2.
+         At this level 1, a is encoded as 1 so find rank(1,2), which would be 2.
+         Take right child path this will be all a i.e. 1111, do a rank query of rank(1,2) which is 2 hence we 
+         rank(4,a) would be 2.
+         http://alexbowe.com/wavelet-trees/
+         https://github.com/alexbowe/wavelet-paper/blob/master/thesis.pdf
          
    * RRR Data structure.
           http://alexbowe.com/rrr/
+          wavelet tree node when stored as RRR sequence can answer rank queries in O(1) time
           
 
 # Practical Application
