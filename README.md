@@ -124,18 +124,25 @@ Repeat the same process now L =2 and in next iteratior we double up i.e 2 symbol
       Trick is in English language any common word like **and** when suffix sorted its previous characters(in last column) would be           **a** and that would contribute to run.
    * Inverting
        Lets see if we have BWT can we recover original string.
+       For sake of illustration lets number a and b.
+       String = a<sub>0</sub>b<sub>0</sub>a<sub>1</sub>b<sub>1</sub>a<sub>2</sub>a<sub>3</sub>$
+       
+       BWT = a<sub>3</sub>a<sub>2</sub>b<sub>1</sub>b<sub>0</sub>$a<sub>1</sub>a<sub>0</sub>
        
        ##### Naive Way.
        
        As we know BWT is last column in sorted cyclic rotation.We also know that first column is sorted.
        
-       $-----a1
-       a1-----a2
-       a2-----b1      
-       a3-----b2
-       a4-----$
-       b1-----a3
-       b2-----a4 
+       F  |     | L|
+       ---|-----|---
+       $  |-----|a<sub>3</sub>
+       a<sub>3</sub>|-----|a<sub>2</sub>
+       a<sub>2</sub>|-----|b<sub>1</sub>      
+       a<sub>1</sub>|-----|b<sub>0</sub>
+       a<sub>0</sub>|-----|$
+       b<sub>0</sub>|-----|a<sub>1</sub>
+       b<sub>1</sub>|-----|a<sub>0</sub>
+       
        combine them because we know what preceeds each sorted suffix and then sort
        
        a$       $a---a         a$a        $ab--a       a$ab       $aba--a       a$aba       $abab-a      a$abab      $ababaa
@@ -160,7 +167,7 @@ Repeat the same process now L =2 and in next iteratior we double up i.e 2 symbol
        So original string is ababaa$
        
    * Pattern Matching using LF mapping
-      Next lets see how BWT is useful in doing pattern matching.
+      Next lets see how BWT is useful in pattern matching.
       Key is to sart searching for pattern in backward fashion because BWT stores what lies before any given symbol.
       For example to search **aba** in **ababaaa**
       start with ab**a** and look in first column.
@@ -169,7 +176,7 @@ Repeat the same process now L =2 and in next iteratior we double up i.e 2 symbol
       so **aba** occurs 2 times in original text.
       Problem with this approach is one has to linearly scan the whole last column range to find the symbol.
       This can be solved using Couting filter which store at each row , for each symbol , its count in last column.
-      So now while lookin for last column look that the symbol transition range.
+      So now while looking for last column look that the symbol transition range.
       For example 
       
       Fst|Last|$  |a  |b  
@@ -183,7 +190,7 @@ Repeat the same process now L =2 and in next iteratior we double up i.e 2 symbol
       b  |a   |1  | 3 |2
       X  |X   | 1 | 4 |2
       
-      For a in first column b changes from 0 to 2 , that means there are 2 b's in last column.
+      For a in first column b changes from 0 to 2 , that means there are 2 b's in last column in the given first column of a.
       Goto B column and then look for 'a' and it changes 2 to 3 that means their is 1 a before a so pattern aba occurs once in string.
            
    * FM-Index
