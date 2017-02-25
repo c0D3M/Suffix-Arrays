@@ -10,10 +10,12 @@ There are so many algorithm being developed considering vast application of Suff
 * Recursive Algorithm - DC3, KA Algroithm, NZC Algorithm
 * Induced Sorting - S Algorith/MF Algorithm
 
+Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster.ca/~bill/best/algorithms/07Taxonomy.pdf)
+
 # Prefix Doubling Algorithm
 Key idea is if you take cyclic rotation at each position of a given string and sort it and remove everything after $ from each string you will have a sorted suffix.
 Lets see this with an example 
-String = ababaa
+String = ababa
 Append $ at the end this will help in indetifying each uique suffix, for example try to make suffix tree for papa
 it will be 
 a
@@ -30,7 +32,8 @@ apa$
 papa$
 
 So our input string is ababaa$
-String starting at index.
+Lets do cyclic rotation , sort it and remove everything after $ symbol.
+Cyclic rotation is nothing but starting at each index , taking into account each symbol and finally ending at one previous position.
 
 index | string|index | string|index | string
 ------|-------|------|-------|------|-------
@@ -44,20 +47,22 @@ index | string|index | string|index | string
 
 So final suffix array would be [6, 5, 4, 2, 0, 3, 1]
 Now how to convert this into an efficient algorithm.
-We will first sort 1 characters and then at each iterator double up, so total iterations would be log(n) , in each iterator we will do 'n' cycle to calculate 'order' and 'rank'. SO overall complexity would be O(n log(n))
+We will first sort 1 characters and then at each iteration double up, so total iterations would be log(n) , in each iteration we will do 'n' cycle to calculate 'order' and 'rank'. So overall complexity would be O(n log(n))
+Lets explain this **order** and **rank**.
 
 order: index of suffix in lexigoraphic order in this scan cycle. 
-rank:  different type of string encoruted in this scan cycle.
+rank:  different types of string we encountered in this scan cycle.
 
 Lets start with 1
 ababaa$
-Counting sort       Partial Sum 
+Counting sort       Partial Sum [count]
 $ -> 1               $ -> 1
 a -> 4               a -> 5    
 b -> 2               b -> 7
+
 Scan from backward 
-Each count[literal]-- 
-order [count[literal]-- ] = pos
+Each count[symbol]-- 
+order [count[symbol]-- ] = pos
 
 ababaa$
 
@@ -71,20 +76,39 @@ i  |str |Count|Order
 1  |  b |  5  |6, ,2,4,5,1,3
 0  |  a |  1  |6,0,2,4,5,1,3 
 
-We scan the inpur string from backward and we know based on couting sort that their is 1 $, 4 a and 2 b , so a is going to end  (count of $) + count of a i.e. at 5 , similarly b will end at 7
+We scan the input string from backward and we know based on couting sort that their is 1 $, 4 a and 2 b , so a is going to end  (count of $) + count of a i.e. at 5 , similarly b will end at 7
 One more thing is stable sort i.e. if we encounter 2 a's order will be decided based on order of occurence in string.
 So we have 4 a's at index 0,2,4,5 and in suffix array they come in same order.
-So this is how we have calculated order when taken 1 at a time.
+So this is how we have calculated order when taken 1 symbol at a time.
 
-rank array : each distinguised elemnt occur in order 
+rank array : each distinguised symbol occur in order 
 rank = [0,1,1,1,1,2,2] because there are only 3 different elements i.e. $, a, b
 
+Similar in next iteration we will take 2 symbol at a time from the order/rank of previous cycle.
+               0123456 
+order string = $aaaabb
+Original     = ababaa$
+order = [6, 0, 2, 4, 5, 1, 3]
+rank =  [0, 1, 1, 1, 1, 2, 2]
 
+Start from end in the order of previous cycle.
+Get its order and move L symbol back and get its class.
+order['b']= 3 move L symbol back i.e. 'a'
+newOrder[rank['a']]== pos
 
+i  | order [i]| back symbol    | count| order|
+---|----------|----------------|------|------|
+6  |   3      |     a(2)       |   4  | , , , ,2, ,
+5  |   1      |     a(0)       |   3  | , , ,0,2, , ,
+4  |   5      |     a(4)       |   2  | , ,4,0,2, ,
+3  |   4      |     b(3)       |   6  | , ,4,0,2, ,3
+2  |   2      |     b(1)       |   5  | , ,4,0,2,1,3
+1  |   0      |     $(6)       |   0  |6, ,4,0,2,1,3
+0  |   6      |     a(5)       |   1  |6,5,4,0,2,1,3
 
-
-Complete taxonomy of these algorithm can be found [here](http://www.cas.mcmaster.ca/~bill/best/algorithms/07Taxonomy.pdf)
-
+So after this iteratior we have SA when 2 symbol taken at a time.
+Next calculate rank for these , by coparing first half and second half for next string.
+Repeat the same process now L =2 and in next iteratior we double up i.e 2 symbol back.
 
 # DC3 Algorithm
 # S[Seward] Algorithm
