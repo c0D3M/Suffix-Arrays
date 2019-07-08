@@ -1,5 +1,6 @@
 # Suffix Arrays
-I am sharing my experince with various Suffix Array Construction Algorithms(SACA).
+I am sharing my experince with various Suffix Array Construction Algorithms(SACA).  
+Visualizer for Suffix Tree https://visualgo.net/en/suffixtree  
 
 # Introduction
 Few years back I stumbled upon this nice data structure Suffix Tree. I must admit its construction is a bit complex.
